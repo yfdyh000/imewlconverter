@@ -55,7 +55,7 @@ for:
         - 7z a imewlconverter_Windows.zip "%DIST%\*.exe" "%DIST%\*.dll" "%DIST%\Readme.txt" "%DIST%\*.runtimeconfig.json"
       after_build:
       test_script:
-        - dotnet test "%APPVEYOR_BUILD_FOLDER%\src\ImeWlConverterCoreTest\ImeWlConverterCoreTest.csproj" -logger:Appveyor -restore:False
+        - dotnet test "%APPVEYOR_BUILD_FOLDER%\src\ImeWlConverterCoreTest\ImeWlConverterCoreTest.csproj" -restore:False
       artifacts:
         - path: imewlconverter_Windows.zip
           name: WinForm
