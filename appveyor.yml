@@ -31,7 +31,7 @@ for:
         description: 'New Release'
         provider: GitHub
         auth_token:
-            secure: XLH30sjOKisCZ2+ehPEf+7NVmaKdH8khPqwfT8BOOg6X6TWo48ptjgj21SZPHrYl            # your encrypted token from GitHub
+            secure: WCIZbrIKxRylI8/zMgAL8Y8nIbrJufMdAUFmtX3qkhaYOW/CaQ93F6UhgHoH2JV1  # your encrypted token from GitHub
         artifact: imewlconverter_Linux_Mac.tar.gz            # upload all NuGet packages to release assets
         draft: false
         prerelease: false
@@ -62,7 +62,7 @@ for:
         description: 'New Release'
         provider: GitHub
         auth_token:
-            secure: XLH30sjOKisCZ2+ehPEf+7NVmaKdH8khPqwfT8BOOg6X6TWo48ptjgj21SZPHrYl            # your encrypted token from GitHub
+            secure: WCIZbrIKxRylI8/zMgAL8Y8nIbrJufMdAUFmtX3qkhaYOW/CaQ93F6UhgHoH2JV1  # your encrypted token from GitHub
         artifact: imewlconverter_Windows.zip            # upload all NuGet packages to release assets
         draft: false
         prerelease: false
