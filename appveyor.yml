@@ -55,6 +55,7 @@ for:
         - 7z a imewlconverter_Windows.zip "%DIST%\*.exe" "%DIST%\*.dll" "%DIST%\Readme.txt" "%DIST%\*.runtimeconfig.json"
       after_build:
       test_script:
+        - del C:\Tools\NUnit3\appveyor.addins /q
         - nunit3-console "C:\imewlconverter\src\ImeWlConverterCoreTest\bin\Release\net6.0\ImeWlConverterCoreTest.dll" -result=myresults.xml;format=AppVeyor
       artifacts:
         - path: imewlconverter_Windows.zip
