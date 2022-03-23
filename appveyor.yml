@@ -10,9 +10,9 @@ for:
           - image: Ubuntu
       clone_folder: ~/imewlconverter
       build_script:
-        - dotnet build ./src/ImeWlConverterCmd --configuration Release
+        - dotnet build ./src/ImeWlConverterCmd --configuration Debug
       after_build:
-        - cd ./src/ImeWlConverterCmd/bin/Release/net6.0
+        - cd ./src/ImeWlConverterCmd/bin/Debug/net6.0
         - tar czvf ./imewlconverter_Linux_Mac.tar.gz *
         - mv ./imewlconverter_Linux_Mac.tar.gz ~/imewlconverter
         - cd ~/imewlconverter
@@ -21,23 +21,23 @@ for:
         - cd ./src/ImeWlConverterCoreTest
         - dotnet add ImeWlConverterCoreTest.csproj package Appveyor.TestLogger --version 2.0.0
         - cd ../..
-        - dotnet test --test-adapter-path:. --logger:Appveyor ./src/ImeWlConverterCoreTest/ImeWlConverterCoreTest.csproj --configuration Release
+        - dotnet test --test-adapter-path:. --logger:Appveyor ./src/ImeWlConverterCoreTest/ImeWlConverterCoreTest.csproj --configuration Debug
       artifacts:
         - path: imewlconverter_Linux_Mac.tar.gz
           name: DotnetCore
       deploy:
         tag: $(APPVEYOR_REPO_TAG_NAME)
-        release: imewlconverter-$(APPVEYOR_REPO_TAG_NAME)
-        description: 'New Release'
+        Debug: imewlconverter-$(APPVEYOR_REPO_TAG_NAME)
+        description: 'New Debug'
         provider: GitHub
         auth_token:
             secure: WCIZbrIKxRylI8/zMgAL8Y8nIbrJufMdAUFmtX3qkhaYOW/CaQ93F6UhgHoH2JV1  # your encrypted token from GitHub
-        artifact: imewlconverter_Linux_Mac.tar.gz            # upload all NuGet packages to release assets
+        artifact: imewlconverter_Linux_Mac.tar.gz            # upload all NuGet packages to Debug assets
         draft: false
-        prerelease: false
+        preDebug: false
         force_update: true
         #on:
-        #    branch: master                 # release from master branch only
+        #    branch: master                 # Debug from master branch only
         #    APPVEYOR_REPO_TAG: true        # deploy on tag push only
     -
       matrix:
@@ -46,29 +46,29 @@ for:
       clone_folder: C:\imewlconverter
       before_build:
         - MSBuild "C:\imewlconverter\src\IME WL Converter WinForm.sln" -t:restore
-        - C:\imewlconverter\nuget.exe restore "C:\imewlconverter\src\IME WL Converter WinForm.sln"
+        - nuget restore "C:\imewlconverter\src\IME WL Converter WinForm.sln"
       build_script:
-        - MSBuild "C:\imewlconverter\src\IME WL Converter WinForm.sln" /t:Rebuild /p:Configuration=Release
+        - MSBuild "C:\imewlconverter\src\IME WL Converter WinForm.sln" /t:Rebuild /p:Configuration=Debug
       after_build:
-        - 7z a imewlconverter_Windows.zip "C:\imewlconverter\src\IME WL Converter Win\bin\Release\*.exe" "C:\imewlconverter\src\IME WL Converter Win\bin\Release\ImeWlConverterCore.dll" "C:\imewlconverter\src\IME WL Converter Win\bin\Release\Readme.txt" "C:\imewlconverter\src\IME WL Converter Win\bin\Release\*.manifest"
+        - 7z a imewlconverter_Windows.zip "C:\imewlconverter\src\IME WL Converter Win\bin\Debug\*.exe" "C:\imewlconverter\src\IME WL Converter Win\bin\Debug\ImeWlConverterCore.dll" "C:\imewlconverter\src\IME WL Converter Win\bin\Debug\Readme.txt" "C:\imewlconverter\src\IME WL Converter Win\bin\Debug\*.manifest"
       test_script:
-        - nunit3-console "C:\imewlconverter\src\ImeWlConverterCoreTest\bin\Release\net6.0\ImeWlConverterCoreTest.dll" -result=myresults.xml;format=AppVeyor
+        - nunit3-console "C:\imewlconverter\src\ImeWlConverterCoreTest\bin\Debug\net6.0\ImeWlConverterCoreTest.dll" -result=myresults.xml;format=AppVeyor
       artifacts:
         - path: imewlconverter_Windows.zip
           name: WinForm
       deploy:
         tag: $(appveyor_repo_tag_name)
-        release: imewlconverter-$(appveyor_repo_tag_name)
-        description: 'New Release'
+        Debug: imewlconverter-$(appveyor_repo_tag_name)
+        description: 'New Debug'
         provider: GitHub
         auth_token:
             secure: WCIZbrIKxRylI8/zMgAL8Y8nIbrJufMdAUFmtX3qkhaYOW/CaQ93F6UhgHoH2JV1  # your encrypted token from GitHub
-        artifact: imewlconverter_Windows.zip            # upload all NuGet packages to release assets
+        artifact: imewlconverter_Windows.zip            # upload all NuGet packages to Debug assets
         draft: false
-        prerelease: false
+        preDebug: false
         force_update: true
         #on:
-        #    branch: master                 # release from master branch only
+        #    branch: master                 # Debug from master branch only
         #    APPVEYOR_REPO_TAG: true        # deploy on tag push only
 
  
