@@ -63,7 +63,6 @@ for:
            (New-Object Net.WebClient).DownloadFile('https://www.appveyor.com/downloads/Appveyor.NUnit3Logger.zip', $zipPath)
            7z x $zipPath -y -o"$nunitPath\addins" | Out-Null
            Move-Item "$nunitPath\addins\appveyor.addins" "$nunitPath\appveyor.addins"
-           set nunitPath=$nunitPath
 
         - SET SLNPATH=%APPVEYOR_BUILD_FOLDER%\src\IME WL Converter WinForm.sln
         - SET DIST=%APPVEYOR_BUILD_FOLDER%\src\IME WL Converter Win\bin\Release\net6.0-windows
