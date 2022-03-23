@@ -18,7 +18,8 @@ init:
    $zipPath = "$env:TEMP\Appveyor.NUnit3Logger.zip"
    (New-Object Net.WebClient).DownloadFile('https://www.appveyor.com/downloads/Appveyor.NUnit3Logger.zip', $zipPath)
    7z x $zipPath -y -o"$nunitPath\addins" | Out-Null
-    Move-Item "$nunitPath\addins\appveyor.addins" "$nunitPath\appveyor.addins"
+   Move-Item "$nunitPath\addins\appveyor.addins" "$nunitPath\appveyor.addins"
+   set nunitPath=$nunitPath
 
 version: "{branch}.{build}"
 for:
@@ -73,7 +74,7 @@ for:
         - 7z a imewlconverter_Windows.zip "%DIST%\*.exe" "%DIST%\*.dll" "%DIST%\Readme.txt" "%DIST%\*.runtimeconfig.json"
       after_build:
       test_script:
-        - nunit3-console "C:\imewlconverter\src\ImeWlConverterCoreTest\bin\Release\net6.0\ImeWlConverterCoreTest.dll" -result=myresults.xml;format=AppVeyor
+        - %nunitPath%\nunit3-console "C:\imewlconverter\src\ImeWlConverterCoreTest\bin\Release\net6.0\ImeWlConverterCoreTest.dll" -result=myresults.xml;format=AppVeyor
       artifacts:
         - path: imewlconverter_Windows.zip
           name: WinForm
